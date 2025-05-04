@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVPTest.Models
 {
-    public class FormBase : Form
+    public abstract class FormBase : Form
     {
         private bool isVisible;
 

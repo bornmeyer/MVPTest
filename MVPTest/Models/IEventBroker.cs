@@ -12,6 +12,10 @@ namespace MVPTest.Models
 
         Task SendEvent<TReceiver>(IEvent toSend);
 
-        Task SendEvent<TReceiver, T>(IEvent<T> toSend) where T : class;
+        Task SendEvent<TReceiver, T>(IEvent<T> toSend);
+
+        Task Broadcast(IEvent toSend);
+
+        Task Broadcast<T>(IEvent<T> toSend);
     }
 }

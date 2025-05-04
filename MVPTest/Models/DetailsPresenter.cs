@@ -28,15 +28,21 @@ namespace MVPTest.Models
             await task;
         }
 
-        public Task ReceiveEvent<TEventData>(IEvent<TEventData> receivedEvent) where TEventData : class
+        public async Task ReceiveEvent<TEventData>(IEvent<TEventData> receivedEvent) 
         {
-            throw new NotImplementedException();
+            var task = receivedEvent switch
+            {
+                _ => Task.CompletedTask
+            };
+            await task;
         }
 
         private async Task UpdateAsync()
-        {   
+        {
+            var newId = await userIdService.CreateIdAsync();
             View!.IsVisible = true;
-            View!.Id = (await userIdService.CreateIdAsync()).ToString();
+            View!.Id = newId.ToString();
+            await _eventBroker!.Broadcast(new IdGeneratedEvent(newId));
         }
     }
 }

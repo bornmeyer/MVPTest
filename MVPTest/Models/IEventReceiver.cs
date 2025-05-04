@@ -10,7 +10,7 @@ namespace MVPTest.Models
     {
         Task ReceiveEvent(IEvent receivedEvent);
 
-        Task ReceiveEvent<TEventData>(IEvent<TEventData> receivedEvent) where TEventData : class;
+        Task ReceiveEvent<TEventData>(IEvent<TEventData> receivedEvent);
 
     }
 }

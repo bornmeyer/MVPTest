@@ -10,7 +10,7 @@ namespace MVPTest.Models
     {
     }
 
-    public interface IEvent<TEventData> where TEventData : class
+    public interface IEvent<TEventData>
     {
         TEventData Data { get; }
     }

@@ -21,10 +21,17 @@ namespace MVPTest.Models
             throw new NotImplementedException();
         }
 
-        public Task ReceiveEvent<TEventData>(IEvent<TEventData> receivedEvent) where TEventData : class
+        public async Task ReceiveEvent<TEventData>(IEvent<TEventData> receivedEvent)
         {
-            throw new NotImplementedException();
+            var task = receivedEvent switch
+            {
+                IdGeneratedEvent {  Data: var data } => UpdateTitle(data),
+                _ => Task.CompletedTask
+            };
+            await task;
         }
+
+        private async Task UpdateTitle(Guid id) => View!.Title = $"{id}";
 
         public override void WireEvents(IMainView view)
         {

@@ -23,14 +23,30 @@ namespace MVPTest.Models
 
         public async Task SendEvent<TReceiver>(IEvent toSend)
         {
-            if(_registered.TryGetValue(typeof(TReceiver), out var receiver))
+            if (_registered.TryGetValue(typeof(TReceiver), out var receiver))
                 await receiver.ReceiveEvent(toSend);
         }
 
-        public async Task SendEvent<TReceiver, T>(IEvent<T> toSend) where T : class
+        public async Task SendEvent<TReceiver, T>(IEvent<T> toSend)
         {
             if (_registered.TryGetValue(typeof(TReceiver), out var receiver))
                 await receiver.ReceiveEvent(toSend);
+        }
+
+        public async Task Broadcast(IEvent toSend)
+        {
+            foreach (var current in _registered.Values)
+            {
+                await current.ReceiveEvent(toSend);
+            }
+        }
+
+        public async Task Broadcast<T>(IEvent<T> toSend)
+        {
+            foreach (var current in _registered.Values)
+            {
+                await current.ReceiveEvent(toSend);
+            }
         }
     }
 }

@@ -48,7 +48,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(CreateIdButton);
             Name = "MainForm";
-            Text = "Form1";
+            Text = "test";
             ResumeLayout(false);
         }
 

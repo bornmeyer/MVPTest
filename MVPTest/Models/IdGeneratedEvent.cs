@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace MVPTest.Models
 {
-    public interface IMainView : IView
+    public class IdGeneratedEvent(Guid data) : IEvent<Guid>
     {
-        String Title
-        {
-            get;
-            set;
-        }
-
-        event Action? OnCreateIdClicked;
+        public Guid Data => data;
     }
 }

@@ -6,6 +6,7 @@ namespace MVPTest
     {
         private readonly IMainPresenter presenter;
 
+        public string Title { get => Text; set => Text = value; }
 
         public event Action? OnCreateIdClicked;
 
